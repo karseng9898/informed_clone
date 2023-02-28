@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
+import 'spacings.dart';
 
-final AppTheme = ThemeData().copyWith(
-  colorScheme: ThemeData().colorScheme.copyWith(
-        background: const Color(0xFFFEFEFE),
+class AppTheme {
+  static TextButtonThemeData textButtonTheme = TextButtonThemeData(
+    style: TextButton.styleFrom(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacings.xl,
+        vertical: AppSpacings.lg,
       ),
-  scaffoldBackgroundColor: AppColors.backgroundColor,
-  textTheme: TextTheme(
-    titleLarge: Typography.blackHelsinki.titleLarge?.copyWith(
-      color: Colors.black,
+      backgroundColor: const Color(0xFF333333),
+      disabledBackgroundColor: const Color(0xFF777777),
+      foregroundColor: Colors.white,
     ),
-    headlineLarge: Typography.blackHelsinki.headlineLarge?.copyWith(
-      color: AppColors.labelColor,
-      fontWeight: FontWeight.w500,
-    ),
+  );
+  static final lightTheme = ThemeData(
+    colorScheme: _colorScheme,
+    scaffoldBackgroundColor: AppColors.backgroundColor,
+    textTheme: _lightTextTheme,
+    textButtonTheme: textButtonTheme,
+  );
+
+  static final _colorScheme = ThemeData().colorScheme.copyWith(
+        background: const Color(0xFFFEFEFE),
+      );
+
+  static final _lightTextTheme = TextTheme(
+    titleLarge: Typography.blackHelsinki.titleLarge,
+    headlineLarge: Typography.blackHelsinki.headlineLarge
+        ?.copyWith(color: AppColors.labelColor),
     headlineSmall: Typography.blackHelsinki.headlineSmall?.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.w500,
@@ -23,5 +38,7 @@ final AppTheme = ThemeData().copyWith(
     ),
     bodyLarge: Typography.blackHelsinki.bodyLarge,
     bodyMedium: Typography.blackHelsinki.bodyMedium,
-  ),
-);
+  );
+}
+
+extension _LightTheme on AppTheme {}

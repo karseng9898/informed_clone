@@ -10,6 +10,7 @@ class OnboardingScreenBloc
     extends Bloc<OnboardingScreenEvent, OnboardingScreenState> {
   OnboardingScreenBloc() : super(const OnboardingScreenState()) {
     on<EmailChanged>(_onEmailChanged);
+    on<FormSubmitted>(_onFormSubmitted);
   }
 
   void _onEmailChanged(
@@ -23,5 +24,15 @@ class OnboardingScreenBloc
         status: Formz.validate([email]),
       ),
     );
+  }
+
+  void _onFormSubmitted(
+    FormSubmitted event,
+    Emitter<OnboardingScreenState> emit,
+  ) async {
+    emit(state.copyWith(isSubmitting: true));
+    await Future.delayed(const Duration(milliseconds: 1500), () {
+      emit(state.copyWith(isSubmitting: false));
+    });
   }
 }

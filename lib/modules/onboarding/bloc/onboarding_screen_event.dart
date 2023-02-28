@@ -17,4 +17,4 @@ class EmailChanged extends OnboardingScreenEvent {
 }
 
 
-class FormSubmitted extends OnboardingScreenState {}
+class FormSubmitted extends OnboardingScreenEvent {}
